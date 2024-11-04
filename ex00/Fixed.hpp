@@ -1,10 +1,13 @@
+#ifndef FIXED_HPP
+#define FIXED_HPP
+
 #include <iostream>
 
 class   Fixed {
 
 public:
     Fixed();
-    Fixed(const Fixed& copy);
+    Fixed(const Fixed& src);
     Fixed& operator=(const Fixed& src);
     ~Fixed();
 
@@ -13,6 +16,8 @@ public:
 
 private:
     int                 _fixedPointNum;
-    static const int    _fractionalBits;
+    static const int    _fractionalBits = 8;
 
 };
+
+#endif
