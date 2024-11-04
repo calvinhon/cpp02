@@ -4,8 +4,8 @@ class   Fixed {
 
 public:
     Fixed();
-    Fixed(const Fixed& other);
-    Fixed& operator=(const Fixed& other);
+    Fixed(const Fixed& copy);
+    Fixed& operator=(const Fixed& src);
     ~Fixed();
 
     int     getRawBits(void) const;
@@ -13,6 +13,6 @@ public:
 
 private:
     int                 _fixedPointNum;
-    static const int    _fractionalBits(8);
+    static const int    _fractionalBits;
 
 };
