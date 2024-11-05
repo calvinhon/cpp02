@@ -6,12 +6,34 @@ Fixed::Fixed(): _fixedPointNum(0) {
 
 Fixed::Fixed(const int num) {
 	std::cout << "Int constructor called" << std::endl;
-	_fixedPointNum = num << _fractionalBits;
+    int max_value = (1 << (sizeof(_fixedPointNum) * 8 - _fractionalBits - 1)) - 1;
+    int min_value = -(1 << (sizeof(_fixedPointNum) * 8 - _fractionalBits - 1));
+
+    if (num > max_value) {
+        _fixedPointNum = max_value << _fractionalBits;
+    }
+    else if (num < min_value) {
+        _fixedPointNum = min_value << _fractionalBits;
+    }
+    else {
+        _fixedPointNum = num << _fractionalBits;
+    }
 }
 
 Fixed::Fixed(const float num) {
 	std::cout << "Float constructor called" << std::endl;
-	_fixedPointNum = roundf(num * (1 << _fractionalBits));
+    int max_value = (1 << (sizeof(_fixedPointNum) * 8 - _fractionalBits - 1)) - 1;
+    int min_value = -(1 << (sizeof(_fixedPointNum) * 8 - _fractionalBits - 1));
+
+    if (num > max_value) {
+        _fixedPointNum = roundf(max_value * (1 << _fractionalBits));
+    }
+    else if (num < min_value) {
+        _fixedPointNum = roundf(min_value * (1 << _fractionalBits));
+    }
+    else {
+        _fixedPointNum = roundf(num * (1 << _fractionalBits));
+    }
 }
 
 Fixed::Fixed(const Fixed& src) {
